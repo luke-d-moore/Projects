@@ -1,0 +1,73 @@
+﻿body {
+}
+
+.inline {
+	float: left;
+	height: 60px;
+	width: 60px;
+	border: 2px solid black;
+}
+
+#divChessBoard {
+	position: relative;
+	top: 0px;
+	left: 400px;
+}
+
+#messagewithbutton {
+	position: relative;
+	left: 150px;
+}
+
+#divBoardRank_8 {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+}
+
+#divBoardRank_7 {
+	position: absolute;
+	top: 64px;
+	left: 0px;
+}
+
+#divBoardRank_6 {
+	position: absolute;
+	top: 128px;
+	left: 0px;
+}
+
+#divBoardRank_5 {
+	position: absolute;
+	top: 192px;
+	left: 0px;
+}
+
+#divBoardRank_4 {
+	position: absolute;
+	top: 256px;
+	left: 0px;
+}
+
+#divBoardRank_3 {
+	position: absolute;
+	top: 320px;
+	left: 0px;
+}
+
+#divBoardRank_2 {
+	position: absolute;
+	top: 384px;
+	left: 0px;
+}
+
+#divBoardRank_1 {
+	position: absolute;
+	top: 448px;
+	left: 0px;
+}
+
+#divChessBoard img {
+	height: 55px;
+	width: 55px;
+}
