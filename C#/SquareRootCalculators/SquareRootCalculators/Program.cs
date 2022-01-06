@@ -17,13 +17,15 @@ namespace SquareRootCalculators
 
 			int i = 0;
 
+			decimal actual = new decimal(Math.Sqrt(decimal.ToDouble(original)));
+
 			while (true)
 			{
 				i++;
 
 				ans = method.Iterate(original, guess);
 
-				method.Display(i, ans);
+				method.Display(i, ans, actual);
 
 				if (method.EndIteration(ans-guess))
 					break;

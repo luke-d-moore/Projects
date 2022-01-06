@@ -7,9 +7,9 @@ namespace SquareRootCalculators.Classes
     public class Method
     {
         public decimal precision = new decimal (0.00001);
-        public void Display(int i, decimal number)
+        public void Display(int i, decimal number, decimal actual)
         {
-            Console.WriteLine($"Result : {number}, iteration : {i}");
+            Console.WriteLine($"Result : {number}, iteration : {i}, Accuracy Within : {(Math.Abs(actual-number)/actual) * 100} %");
         }
 
         public bool EndIteration(decimal diff)
