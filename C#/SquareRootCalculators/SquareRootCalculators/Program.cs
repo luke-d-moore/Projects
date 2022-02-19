@@ -9,17 +9,20 @@ namespace SquareRootCalculators
         static void Main(string[] args)
         {
 			IMethod method = new NewtonsMethod();
+
 			decimal original = 137;
 
 			decimal guess = original;
+
+			decimal actual = new decimal(Math.Sqrt(decimal.ToDouble(original)));
+
+			IMethod lukeMethod = new LukeMethod(original, guess, actual);
 
 			decimal ans;
 
 			int i = 0;
 
-			decimal actual = new decimal(Math.Sqrt(decimal.ToDouble(original)));
-
-			while (true)
+			while (i<= method.getMaxIterations())
 			{
 				i++;
 
@@ -32,6 +35,10 @@ namespace SquareRootCalculators
 
 				guess = ans;
 			}
+
+			lukeMethod.Iterate(0,0);
+
+			Console.WriteLine($"Actual value is {actual}");
 		}
     }
 }

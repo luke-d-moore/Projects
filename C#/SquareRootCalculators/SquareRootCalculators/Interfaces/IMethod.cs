@@ -9,5 +9,6 @@ namespace SquareRootCalculators.Interfaces
         public void Display(int i, decimal number, decimal actual);
         public bool EndIteration(decimal diff);
         decimal Iterate(decimal number, decimal guess);
+        public int getMaxIterations();
     }
 }
