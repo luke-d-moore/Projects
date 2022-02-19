@@ -16,7 +16,7 @@ namespace SquareRootCalculators
 
 			decimal actual = new decimal(Math.Sqrt(decimal.ToDouble(original)));
 
-			IMethod lukeMethod = new LukeMethod(original, guess, actual);
+			IMethod lukeMethod = new LukeMethod(original, actual);
 
 			decimal ans;
 
@@ -36,7 +36,7 @@ namespace SquareRootCalculators
 				guess = ans;
 			}
 
-			lukeMethod.Iterate(0,0);
+			lukeMethod.Iterate(original,original);
 
 			Console.WriteLine($"Actual value is {actual}");
 		}
