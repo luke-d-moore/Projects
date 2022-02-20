@@ -7,6 +7,29 @@ namespace SquareRootCalculators.Classes
 {
     public class LukeMethod : Method, IMethod
     {
+
+        //Explanation of the method
+        //Start with a value Num, which is the number to be square rooted
+        //start with 2 points on the curve of y=x^2
+        //one which is definitely below the square root and one which is higher
+        //xL is the lower X value, yL is lower y value = xL*xL
+        //xB is the Bigger X value, yB is Bigger y value = xB*xB
+        //start off with xL =0 and xB = Number to be square rooted
+        //x0 is the new estimate of the square root
+        //then apply the formula
+        //x0 = (xB-xL)*((Num-yL)/(yB-yL)) + xL
+        //this formula works by first assuming linearity between the points (xL,yL) and (xB,yB)
+        //then it takes the big value and weights to 100 and lower value weighted to 0 and 
+        //works out a fraction number F, representing where the number which is being square rooted lies
+        //then it applies this fraction F to the x values to estimate a new value for x0
+        //if x0*x0 < Num then x0 is less than the square root and x0 is the new xL
+        //if x0*x0 > Num then x0 is greater than the square root and x0 is the new xB 
+        //then repeat and it rapidly converges to the value of the square root in most cases faster than Newtons Method
+        //There is an adjustment which is being done based on the fraction F mentioned before
+        //to help narrow the range between xB and xL the value of the fraction is taken into account to 
+        //adjust the value of xB during each iteration to trim the number range which we know the 
+        //square root is definitely not in this allows more rapid convergence
+
         private decimal Num;
         private decimal x_B;
         private decimal x_L;
