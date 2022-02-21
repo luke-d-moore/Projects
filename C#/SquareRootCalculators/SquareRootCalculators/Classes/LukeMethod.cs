@@ -56,6 +56,10 @@ namespace SquareRootCalculators.Classes
             Console.WriteLine("========Luke Method Here==========");
             Console.WriteLine("==================================");
 
+            var Lukewatch = new System.Diagnostics.Stopwatch();
+
+            Lukewatch.Start();
+
             int i = 0;
             while (i<=getMaxIterations() && x_L<x_B)
             {
@@ -70,6 +74,10 @@ namespace SquareRootCalculators.Classes
                 if(EndIteration(x_L - prevXLValue))
                     break;
             }
+
+            Lukewatch.Stop();
+
+            Console.WriteLine($"Execution Time for Luke Method: {Lukewatch.ElapsedMilliseconds} ms");
 
             return x_L;
         }
