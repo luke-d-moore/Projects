@@ -14,21 +14,21 @@ namespace SquareRootCalculators
 
 			decimal guess = original;
 
-			var Actualwatch = new System.Diagnostics.Stopwatch();
+			var watch = new System.Diagnostics.Stopwatch();
 
-			Actualwatch.Start();
+			watch.Start();
 
 			decimal actual = new decimal(Math.Sqrt(decimal.ToDouble(original)));
 
-			Actualwatch.Stop();
+			watch.Stop();
 
-			Console.WriteLine($"Execution Time for Actual Method: {Actualwatch.ElapsedMilliseconds} ms");
+			Console.WriteLine($"Actual value is {actual}");
+
+			Console.WriteLine($"Execution Time for Actual Method: {watch.ElapsedMilliseconds} ms");
 
 			IMethod lukeMethod = new LukeMethod(original, actual);
 
-			var Newtonwatch = new System.Diagnostics.Stopwatch();
-
-			Newtonwatch.Start();
+			watch.Restart();
 
 			decimal ans;
 
@@ -48,13 +48,11 @@ namespace SquareRootCalculators
 				guess = ans;
 			}
 
-			Newtonwatch.Stop();
+			watch.Stop();
 
-			Console.WriteLine($"Execution Time for Newton Method: {Newtonwatch.ElapsedMilliseconds} ms");
+			Console.WriteLine($"Execution Time for Newton Method: {watch.ElapsedMilliseconds} ms");
 
 			lukeMethod.Iterate(original,original);
-
-			Console.WriteLine($"Actual value is {actual}");
 		}
     }
 }
