@@ -84,23 +84,14 @@ namespace SquareRootCalculators.Classes
 
         private void FindNextValue(decimal Num, decimal x_L, decimal x_B)
         {
-            SetX_L(x_L);
-
-            var F = FindF(Num, x_L * x_L, x_B * x_B);
-            x_B = AdjustX_B(F, x_L, x_B);
+            x_B = AdjustX_B(x_L, x_B);
             SetX_B(x_B);
 
-            F = FindF(Num, x_L * x_L, x_B * x_B);
+            var F = FindF(Num, x_L * x_L, x_B * x_B);
+
             var x_0 = FindX_0(x_L, x_B, F);
 
-            if (x_0 * x_0 > Num)
-            {
-                SetX_B(x_0);
-            }
-            else
-            {
-                SetX_L(x_0);
-            }
+            SetX_L(x_0);
 
         }
 
@@ -125,72 +116,24 @@ namespace SquareRootCalculators.Classes
             return x_0;
         }
 
-        private decimal AdjustX_B(decimal F, decimal x_L, decimal x_B)
+        private decimal AdjustX_B(decimal x_L, decimal x_B)
         {
             decimal factor = 0M;
 
-            if (F < 0.10M)
+            decimal newXB = x_B;
+
+            decimal returnValueNewX_B = x_B;
+
+            while(newXB * newXB > Num)
             {
-                factor = 0.9M;
-            }
-            else if (F < 0.20M)
-            {
-                factor = 0.8M;
-            }
-            else if (F < 0.30M)
-            {
-                factor = 0.7M;
-            }
-            else if (F < 0.40M)
-            {
-                factor = 0.6M;
-            }
-            else if (F < 0.50M)
-            {
-                factor = 0.5M;
-            }
-            else if (F < 0.60M)
-            {
-                factor = 0.4M;
-            }
-            else if (F < 0.70M)
-            {
-                factor = 0.3M;
-            }
-            else if (F < 0.80M)
-            {
-                factor = 0.2M;
-            }
-            else if (F < 0.90M)
-            {
-                factor = 0.1M;
-            }
-            else
-            {
-                factor = 0M;
+                returnValueNewX_B = newXB;
+
+                factor += 0.05M;
+
+                newXB = x_B - (x_B - x_L) * factor;
             }
 
-            var newXB = x_B - (x_B - x_L) * factor;
-
-            if (newXB * newXB > Num)
-            {
-                return newXB;
-            }
-            else
-            {
-                return FineAdjustX_B(F, x_L, x_B);
-            }
+            return returnValueNewX_B;
         }
-
-        private decimal FineAdjustX_B(decimal F, decimal x_L, decimal x_B)
-        {
-            decimal factor = 0M;
-            if (F < 0.5M)
-            {
-                factor = 0.5M;
-            }
-            return x_B - (x_B - x_L) * factor;
-        }
-
     }
 }
