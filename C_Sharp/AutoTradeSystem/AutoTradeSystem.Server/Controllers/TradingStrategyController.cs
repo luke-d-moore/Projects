@@ -1,6 +1,7 @@
 ﻿using AutoTradeSystem.Server.Services;
 using Microsoft.AspNetCore.Mvc;
 using AutoTradeSystem.Server.Dtos;
+using Swashbuckle.AspNetCore.Annotations;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -28,6 +29,8 @@ namespace AutoTradeSystem.Server.Controllers
 
         // POST api/<TradingStrategyController>
         [HttpPost]
+        [SwaggerOperation(nameof(AddStrategy))]
+        [SwaggerResponse(StatusCodes.Status200OK, "OK", typeof(string))]
         public async Task<IActionResult> AddStrategy(TradingStrategyDto tradingStrategy)
         {
             if (tradingStrategy == null) return BadRequest("Invalid Strategy");
@@ -50,6 +53,9 @@ namespace AutoTradeSystem.Server.Controllers
 
         // DELETE api/<TradingStrategyController>/5
         [HttpDelete("{id}")]
+        [SwaggerOperation(nameof(DeleteStrategy))]
+        [SwaggerResponse(StatusCodes.Status200OK, "OK")]
+        [SwaggerResponse(StatusCodes.Status404NotFound, "Not Found")]
         public async Task<IActionResult> DeleteStrategy(string id)
         {
             var removed = await _autoTradingStrategyService.RemoveStrategy(id);
