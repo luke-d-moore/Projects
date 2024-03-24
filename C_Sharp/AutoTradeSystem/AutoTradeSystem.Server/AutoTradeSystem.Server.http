@@ -1,0 +1,6 @@
+@AutoTradeSystem.Server_HostAddress = http://localhost:5211
+
+GET {{AutoTradeSystem.Server_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
