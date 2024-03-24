@@ -58,7 +58,7 @@ namespace AutoTradeSystem.Server.Controllers
             {
                 _logger.LogError("Failed To Add Stretagy {@strategyDetails}", tradingStrategy);
             }
-            return added ? Ok(added) : BadRequest("Failed To Add Strategy");
+            return added ? Ok("Strategy Added Successfully") : BadRequest("Failed To Add Strategy");
         }
 
         // DELETE api/<TradingStrategyController>/5
@@ -82,7 +82,7 @@ namespace AutoTradeSystem.Server.Controllers
             {
                 _logger.LogError("Failed To Remove Stretagy {0}", id);
             }
-            return removed ? Ok(removed) : NotFound();
+            return removed ? Ok("Stretegy Removed Successfully") : NotFound();
         }
     }
 }

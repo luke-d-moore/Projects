@@ -7,7 +7,7 @@
         public async Task<decimal> GetCurrentPrice(string Ticker)
         {
             await Task.Delay(100);
-            if (_tickers.Contains(Ticker))
+            if (_tickers.Contains(Ticker, StringComparer.OrdinalIgnoreCase))
             {
                 var rand = new Random();
                 return new decimal(rand.NextDouble()*100.0);
@@ -20,7 +20,7 @@
         }
         public async Task<decimal> Buy(string Ticker, int Quantity, decimal OriginalPrice)
         {
-            if (!_tickers.Contains(Ticker))
+            if (!_tickers.Contains(Ticker, StringComparer.OrdinalIgnoreCase))
             {
                 throw new ArgumentException("Invalid Ticker", "ticker");
             }
@@ -37,7 +37,7 @@
         }
         public async Task<decimal> Sell(string Ticker, int Quantity, decimal OriginalPrice)
         {
-            if (!_tickers.Contains(Ticker))
+            if (!_tickers.Contains(Ticker, StringComparer.OrdinalIgnoreCase))
             {
                 throw new ArgumentException("Invalid Ticker", "ticker");
             }
