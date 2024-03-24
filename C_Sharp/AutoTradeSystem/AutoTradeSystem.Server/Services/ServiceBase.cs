@@ -13,6 +13,8 @@
             _logger = logger;
         }
 
+        protected abstract Task CheckTradingStrategies();
+
         protected sealed override async Task ExecuteAsync(CancellationToken cancellationToken)
         {
             _logger.LogInformation("Automatic Trade System Service is starting.");
@@ -33,7 +35,5 @@
 
             _logger.LogInformation("Automatic Trade System Service is stopping.");
         }
-
-        protected abstract Task CheckTradingStrategies();
     }
 }

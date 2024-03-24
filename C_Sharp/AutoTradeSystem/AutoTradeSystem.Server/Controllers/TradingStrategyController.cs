@@ -39,6 +39,16 @@ namespace AutoTradeSystem.Server.Controllers
                 _logger.LogError("Invalid Ticker {0}", tradingStrategy.Ticker);
                 return BadRequest("Invalid Ticker");
             }
+            if (tradingStrategy.Quantity <= 0)
+            {
+                _logger.LogError("Invalid Quantity {0}", tradingStrategy.Quantity);
+                return BadRequest("Invalid Quantity. Quantity must be greater than 0.");
+            }
+            if (tradingStrategy.PriceChange <= 0)
+            {
+                _logger.LogError("Invalid PriceChange {0}", tradingStrategy.PriceChange);
+                return BadRequest("Invalid PriceChange. PriceChange must be greater than 0.");
+            }
             var added = await _autoTradingStrategyService.AddStrategy(tradingStrategy);
             if (added)
             {
@@ -58,6 +68,11 @@ namespace AutoTradeSystem.Server.Controllers
         [SwaggerResponse(StatusCodes.Status404NotFound, "Not Found")]
         public async Task<IActionResult> DeleteStrategy(string id)
         {
+            if (string.IsNullOrEmpty(id))
+            {
+                _logger.LogError("Invalid ID {0}", id);
+                return BadRequest("Invalid ID");
+            }
             var removed = await _autoTradingStrategyService.RemoveStrategy(id);
             if (removed)
             {

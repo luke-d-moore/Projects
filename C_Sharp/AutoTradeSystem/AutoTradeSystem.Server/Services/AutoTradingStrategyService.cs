@@ -5,7 +5,7 @@ namespace AutoTradeSystem.Server.Services
 {
     internal class AutoTradingStrategyService : ServiceBase, IAutoTradingStrategyService
     {
-        private const int CheckRateMilliseconds = 60000;
+        private const int CheckRateMilliseconds = 5000;
         private readonly ILogger<AutoTradingStrategyService> _logger;
         private readonly IDictionary<string, TradingStrategy> _Strategies = new ConcurrentDictionary<string, TradingStrategy>();
         private readonly object _CheckStrategiesLock = new object();
@@ -86,9 +86,14 @@ namespace AutoTradeSystem.Server.Services
             {
                 quote = await _pricingService.GetCurrentPrice(ticker);
             }
-            catch (Exception ex)
+            catch (ArgumentException ex)
             {
                 _logger.LogError(ex, "Invalid Ticker {0}", ticker);
+                return null;
+            }
+            catch(Exception ex)
+            {
+                _logger.LogError(ex, "Exception Thrown");
                 return null;
             }
 
@@ -152,9 +157,17 @@ namespace AutoTradeSystem.Server.Services
                             IDsToRemove.Add(strategy.Key);
                             continue;
                         }
-                        catch(Exception ex)
+                        catch (ArgumentOutOfRangeException ex)
                         {
-                            _logger.LogInformation("Failed to Execute Strategy for {@strategy}", strategy);
+                            _logger.LogInformation(ex, "Failed to Execute Strategy for {@strategy}", strategy);
+                        }
+                        catch (ArgumentException ex)
+                        {
+                            _logger.LogInformation(ex, "Failed to Execute Strategy for {@strategy}", strategy);
+                        }
+                        catch (Exception ex)
+                        {
+                            _logger.LogInformation(ex, "Failed to Execute Strategy for {@strategy}", strategy);
                         }
                     }
 
@@ -166,9 +179,17 @@ namespace AutoTradeSystem.Server.Services
                             IDsToRemove.Add(strategy.Key);
                             continue;
                         }
+                        catch (ArgumentOutOfRangeException ex)
+                        {
+                            _logger.LogInformation(ex, "Failed to Execute Strategy for {@strategy}", strategy);
+                        }
+                        catch (ArgumentException ex)
+                        {
+                            _logger.LogInformation(ex, "Failed to Execute Strategy for {@strategy}", strategy);
+                        }
                         catch (Exception ex)
                         {
-                            _logger.LogInformation("Failed to Execute Strategy for {@strategy}", strategy);
+                            _logger.LogInformation(ex, "Failed to Execute Strategy for {@strategy}", strategy);
                         }
                     }
                 }
