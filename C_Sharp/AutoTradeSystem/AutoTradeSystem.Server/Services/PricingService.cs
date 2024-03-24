@@ -10,7 +10,7 @@
             if (_tickers.Contains(Ticker))
             {
                 var rand = new Random();
-                return new decimal(rand.NextDouble());
+                return new decimal(rand.NextDouble()*100.0);
             }
             else
             {
