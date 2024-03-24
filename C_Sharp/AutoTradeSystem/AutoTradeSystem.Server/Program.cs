@@ -1,5 +1,4 @@
-using AutoTradeSystem.Server;
-using Microsoft.AspNetCore;
+using AutoTradeSystem.Server.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +8,10 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddSingleton<IPricingService, PricingService>();
+builder.Services.AddSingleton<IAutoTradingStrategyService, AutoTradingStrategyService>();
+
 
 var app = builder.Build();
 
@@ -29,8 +32,5 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.MapFallbackToFile("/index.html");
-
-WebHost.CreateDefaultBuilder(args)
-    .UseStartup<Startup>().Build();//.Run();
 
 app.Run();

@@ -11,7 +11,6 @@ namespace AutoTradeSystem.Server.Controllers
     public class TradingStrategyController : ControllerBase
     {
         private readonly ILogger<TradingStrategyController> _logger;
-        //private readonly IHostedServiceAccessor<IAutoTradingStrategyService> _autoTradingStrategyService;
         private readonly IAutoTradingStrategyService _autoTradingStrategyService;
 
         public TradingStrategyController(ILogger<TradingStrategyController> logger, IAutoTradingStrategyService autoTradingStrategyService)//, IHostedServiceAccessor<IAutoTradingStrategyService> autoTradingStrategyService) 
